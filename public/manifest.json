@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Bitten-admin",
+  "name": "Admin panel for Bitten",
   "icons": [
     {
       "src": "favicon.ico",
