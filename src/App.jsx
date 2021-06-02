@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Button from '@material-ui/core/Button';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -6,14 +6,26 @@ import { firebaseInitializeApp } from "./Services/firebaseInitializeApp";
 import { firebaseAuthAsync } from "./Services/firebaseAuthAsync";
 import { firebaseLogOut } from "./Services/firebaseLogOut";
 import "./App.css";
-import { firebaseIsAuth } from "./Services/firebaseIsAuth";
+
+import firebase from "firebase/app";
+import "firebase/auth";
+
 
 export const App = () => {
 
-  const [isLogin, setIsLogin] = useState();
+  const [isLogin, setIsLogin] = useState(false);
+  const [userName, setUserName] = useState("");
 
-  useEffect(() => firebaseInitializeApp(), []);
-  useEffect(() => setIsLogin(firebaseIsAuth()), []);
+  const subscribeAuthChanged = useCallback(() => firebase.auth().onAuthStateChanged(user => {
+    setUserName(user?.displayName);
+    setIsLogin(!!user);
+  }), []);
+
+  useEffect(() => {
+    firebaseInitializeApp();
+    subscribeAuthChanged();
+  }, [subscribeAuthChanged]);
+
 
   return (
     <div className="wrapper">
@@ -32,7 +44,7 @@ export const App = () => {
           startIcon={<ExitToAppIcon />}
           onClick={firebaseLogOut}
         >Log Out</Button>}
-      <button onClick={firebaseIsAuth}>чек</button>
+      {userName}
     </div>
   );
 }
