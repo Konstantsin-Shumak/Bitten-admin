@@ -1,31 +1,23 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from '@material-ui/core/Button';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { firebaseInitializeApp } from "./Services/firebaseInitializeApp";
+import { useFirebiseUserInfo } from "./Hooks/useFirebiseUserInfo";
 import { firebaseAuthAsync } from "./Services/firebaseAuthAsync";
 import { firebaseLogOut } from "./Services/firebaseLogOut";
 import "./App.css";
-
-import firebase from "firebase/app";
-import "firebase/auth";
-
 
 export const App = () => {
 
   const [isLogin, setIsLogin] = useState(false);
   const [userName, setUserName] = useState("");
 
-  const subscribeAuthChanged = useCallback(() => firebase.auth().onAuthStateChanged(user => {
-    setUserName(user?.displayName);
-    setIsLogin(!!user);
-  }), []);
+  const currentUser = useFirebiseUserInfo();
 
   useEffect(() => {
-    firebaseInitializeApp();
-    subscribeAuthChanged();
-  }, [subscribeAuthChanged]);
-
+    setIsLogin(!!currentUser);
+    setUserName(currentUser?.displayName)
+  }, [currentUser]);
 
   return (
     <div className="wrapper">
