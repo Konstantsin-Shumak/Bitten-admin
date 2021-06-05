@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Authorizator } from "./Services/Authorizator";
 import { Home } from "./Pages/Home/Home";
+import { AppStyle } from "./AppStyle";
 
 export const App = () => {
 
@@ -8,12 +9,13 @@ export const App = () => {
 
   useEffect(() => {
     setIsInizialized(false);
-    Authorizator.firebaseInitializeApp();
+    const authorizatorClass = new Authorizator();
+    authorizatorClass.firebaseInitializeApp();
     setIsInizialized(true);
   }, []);
 
   return (
-    <div className="wrapper">
+    <div className={AppStyle().wrapper}>
       {isInizialized
         ?
         <Home />

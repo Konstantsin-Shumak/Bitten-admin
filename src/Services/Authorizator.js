@@ -4,12 +4,12 @@ import { firebaseConfig } from "../Config/firebaseConfig";
 
 export class Authorizator {
 
-    static firebaseInitializeApp = () => firebase.initializeApp(firebaseConfig);
+    firebaseInitializeApp = () => firebase.initializeApp(firebaseConfig);
 
-    static firebaseAuthAsync = () => {
+    firebaseAuthAsync = () => {
         const provider = new firebase.auth.FacebookAuthProvider();
         return firebase.auth().signInWithPopup(provider);
     }
 
-    static firebaseLogOut = () => firebase.auth().signOut();
+    firebaseLogOut = () => firebase.auth().signOut();
 }

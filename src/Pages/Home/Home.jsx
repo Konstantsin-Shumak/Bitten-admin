@@ -11,6 +11,7 @@ export const Home = () => {
 
     const [isLogin, setIsLogin] = useState(false);
     const [userName, setUserName] = useState("");
+    const authorizatorClass = new Authorizator();
 
     useEffect(() => {
         setIsLogin(!!currentUser);
@@ -25,15 +26,15 @@ export const Home = () => {
                     variant="contained"
                     color="primary"
                     startIcon={<FacebookIcon />}
-                    onClick={Authorizator.firebaseAuthAsync}
+                    onClick={authorizatorClass.firebaseAuthAsync}
                 >Log In</Button>
                 :
                 <Button
                     variant="contained"
                     color="default"
                     startIcon={<ExitToAppIcon />}
-                    onClick={Authorizator.firebaseLogOut}
-                >Log Out</Button>} <br />
+                    onClick={authorizatorClass.firebaseLogOut}
+                >Log Out</Button>}
             {userName}
         </>
     )
