@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { firebaseInitializeApp } from "./Services/firebaseInitializeApp";
+import { Authorizator } from "./Services/Authorizator";
 import { Home } from "./Pages/Home/Home";
-import "./App.css";
 
 export const App = () => {
 
@@ -9,7 +8,7 @@ export const App = () => {
 
   useEffect(() => {
     setIsInizialized(false);
-    firebaseInitializeApp();
+    Authorizator.firebaseInitializeApp();
     setIsInizialized(true);
   }, []);
 

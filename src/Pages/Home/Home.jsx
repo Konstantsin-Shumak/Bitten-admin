@@ -3,9 +3,7 @@ import Button from '@material-ui/core/Button';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useGetCurrentUser } from "../../Hooks/useGetCurrentUser";
-import { firebaseAuthAsync } from "../../Services/firebaseAuthAsync";
-import { firebaseLogOut } from "../../Services/firebaseLogOut";
-import "./Home.css";
+import { Authorizator } from "../../Services/Authorizator";
 
 export const Home = () => {
 
@@ -27,14 +25,14 @@ export const Home = () => {
                     variant="contained"
                     color="primary"
                     startIcon={<FacebookIcon />}
-                    onClick={firebaseAuthAsync}
+                    onClick={Authorizator.firebaseAuthAsync}
                 >Log In</Button>
                 :
                 <Button
                     variant="contained"
                     color="default"
                     startIcon={<ExitToAppIcon />}
-                    onClick={firebaseLogOut}
+                    onClick={Authorizator.firebaseLogOut}
                 >Log Out</Button>} <br />
             {userName}
         </>
