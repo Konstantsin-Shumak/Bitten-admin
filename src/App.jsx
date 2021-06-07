@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { Authorizator } from "./Services/Authorizator";
 import { Home } from "./Pages/Home/Home";
 import { AppStyle } from "./AppStyle";
@@ -6,19 +6,25 @@ import { AppStyle } from "./AppStyle";
 export const App = () => {
 
   const [isInizialized, setIsInizialized] = useState(false);
+  const authorizatorClass = useMemo(() => new Authorizator(), []);
+  const logIn = useCallback(() => authorizatorClass.firebaseAuthAsync(), [authorizatorClass]);
+  const logOut = useCallback(() => authorizatorClass.firebaseLogOut(), [authorizatorClass]);
+
 
   useEffect(() => {
     setIsInizialized(false);
-    const authorizatorClass = new Authorizator();
     authorizatorClass.firebaseInitializeApp();
     setIsInizialized(true);
-  }, []);
+  }, [authorizatorClass]);
 
   return (
     <div className={AppStyle().wrapper}>
       {isInizialized
         ?
-        <Home />
+        <Home
+          onLogIn={logIn}
+          onLogOut={logOut}
+        />
         :
         <p>Inizializaiont</p>}
     </div>
