@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from 'react-redux'
 import Button from '@material-ui/core/Button';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useGetCurrentUser } from "../../Hooks/useGetCurrentUser";
+import { login, logout } from "../../Redux/userSlice";
 
-export const Home = (props) => {
+export const Home = () => {
 
     const currentUser = useGetCurrentUser();
+
+    const dispatch = useDispatch();
 
     const [isLogin, setIsLogin] = useState(false);
     const [userName, setUserName] = useState("");
@@ -24,14 +28,14 @@ export const Home = (props) => {
                     variant="contained"
                     color="primary"
                     startIcon={<FacebookIcon />}
-                    onClick={props.onLogIn}
+                    onClick={() => dispatch(login())}
                 >Log In</Button>
                 :
                 <Button
                     variant="contained"
                     color="default"
                     startIcon={<ExitToAppIcon />}
-                    onClick={props.onLogOut}
+                    onClick={() => dispatch(logout())}
                 >Log Out</Button>}
             {userName}
         </>
