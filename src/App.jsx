@@ -1,21 +1,21 @@
-import { useEffect, useState, useMemo } from "react";
-import { Authorizator } from "./Services/Authorizator";
+import { useEffect, useState } from "react";
+import { authorizatorClass } from "./Services/Authorizator";
 import { Home } from "./Pages/Home/Home";
-import { AppStyle } from "./AppStyle";
+import { useStyles } from "./useStyles";
 
 export const App = () => {
 
   const [isInizialized, setIsInizialized] = useState(false);
-  const authorizatorClass = useMemo(() => new Authorizator(), []);
+  const styles = useStyles();
 
   useEffect(() => {
     setIsInizialized(false);
-    authorizatorClass.firebaseInitializeApp();
+    authorizatorClass.initializeApp();
     setIsInizialized(true);
-  }, [authorizatorClass]);
+  }, []);
 
   return (
-    <div className={AppStyle().wrapper}>
+    <div className={styles.wrapper}>
       {isInizialized
         ?
         <Home />

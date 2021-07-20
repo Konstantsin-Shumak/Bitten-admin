@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { useGetCurrentUser } from "../../Hooks/useGetCurrentUser";
-import { login, logout } from "../../Redux/userSlice";
+import { logIn, logOut } from "../../State/userSlice";
 
 export const Home = () => {
 
@@ -28,14 +28,14 @@ export const Home = () => {
                     variant="contained"
                     color="primary"
                     startIcon={<FacebookIcon />}
-                    onClick={() => dispatch(login())}
+                    onClick={() => dispatch(logIn())}
                 >Log In</Button>
                 :
                 <Button
                     variant="contained"
                     color="default"
                     startIcon={<ExitToAppIcon />}
-                    onClick={() => dispatch(logout())}
+                    onClick={() => dispatch(logOut())}
                 >Log Out</Button>}
             {userName}
         </>
