@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {authorizatorClass} from "../Services/Authorizator";
+import { authorizatorClass } from "../Services/Authorizator";
 
 export const userSlice = createSlice({
     name: "user",
@@ -16,8 +16,8 @@ export const userSlice = createSlice({
     }
 });
 
-export const {logIn,logOut} = userSlice.actions;
+export const { logIn, logOut } = userSlice.actions;
 
-export const selectUser = (state) =>state.user.user;
+export const selectUser = (state) => state.user.user;
 
 export const userReducer = userSlice.reducer;

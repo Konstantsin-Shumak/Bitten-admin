@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { authorizatorClass } from "./Services/Authorizator";
-import { Home } from "./Pages/Home/Home";
+import { Home } from "./Pages/Home";
 import { useStyles } from "./useStyles";
 
 export const App = () => {
@@ -20,7 +20,7 @@ export const App = () => {
         ?
         <Home />
         :
-        <p>Inizializaiont</p>}
+        <p>Inizializaion</p>}
     </div>
   );
 }

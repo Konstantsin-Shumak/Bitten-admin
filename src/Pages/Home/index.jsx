@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux'
-import Button from '@material-ui/core/Button';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { useDispatch } from "react-redux";
+import Button from "@material-ui/core/Button";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useGetCurrentUser } from "../../Hooks/useGetCurrentUser";
 import { logIn, logOut } from "../../State/userSlice";
 
