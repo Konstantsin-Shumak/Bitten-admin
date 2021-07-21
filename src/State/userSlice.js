@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { authorizatorClass } from "../Services/Authorizator";
+import { authorizator } from "../Services/Authorizator";
 
 export const userSlice = createSlice({
     name: "user",
@@ -8,10 +8,10 @@ export const userSlice = createSlice({
     },
     reducers: {
         logIn: () => {
-            authorizatorClass.authAsync();
+            authorizator.authAsync();
         },
         logOut: () => {
-            authorizatorClass.logOut();
+            authorizator.logOut();
         },
     }
 });

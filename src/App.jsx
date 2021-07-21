@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { authorizatorClass } from "./Services/Authorizator";
+import { authorizator } from "./Services/Authorizator";
 import { Home } from "./Pages/Home";
 import { useStyles } from "./useStyles";
 
@@ -10,7 +10,7 @@ export const App = () => {
 
   useEffect(() => {
     setIsInizialized(false);
-    authorizatorClass.initializeApp();
+    authorizator.initializeApp();
     setIsInizialized(true);
   }, []);
 

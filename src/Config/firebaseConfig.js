@@ -1,4 +1,4 @@
-export const config = {
+export const firebaseConfig = {
     apiKey: "AIzaSyCgMtsbLXJSeXSEaWiRgQezSkC5xo3ulPo",
     authDomain: "playground-855fa.firebaseapp.com",
     projectId: "playground-855fa",

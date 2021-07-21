@@ -1,10 +1,10 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import { config } from "../Config/config";
+import { firebaseConfig } from "../Config/firebaseConfig";
 
 class Authorizator {
 
-    initializeApp = () => firebase.initializeApp(config);
+    initializeApp = () => firebase.initializeApp(firebaseConfig);
 
     authAsync = () => {
         const provider = new firebase.auth.FacebookAuthProvider();
@@ -13,4 +13,4 @@ class Authorizator {
 
     logOut = () => firebase.auth().signOut();
 }
-export const authorizatorClass = new Authorizator();
+export const authorizator = new Authorizator();
