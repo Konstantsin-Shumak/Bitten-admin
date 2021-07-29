@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Button from '@material-ui/core/Button';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { useDispatch } from "react-redux";
+import Button from "@material-ui/core/Button";
+import FacebookIcon from "@material-ui/icons/Facebook";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useGetCurrentUser } from "../../Hooks/useGetCurrentUser";
-import { firebaseAuthAsync } from "../../Services/firebaseAuthAsync";
-import { firebaseLogOut } from "../../Services/firebaseLogOut";
-import "./Home.css";
+import { logIn, logOut } from "../../State/userSlice";
 
 export const Home = () => {
 
     const currentUser = useGetCurrentUser();
+
+    const dispatch = useDispatch();
 
     const [isLogin, setIsLogin] = useState(false);
     const [userName, setUserName] = useState("");
@@ -27,15 +28,15 @@ export const Home = () => {
                     variant="contained"
                     color="primary"
                     startIcon={<FacebookIcon />}
-                    onClick={firebaseAuthAsync}
+                    onClick={() => dispatch(logIn())}
                 >Log In</Button>
                 :
                 <Button
                     variant="contained"
                     color="default"
                     startIcon={<ExitToAppIcon />}
-                    onClick={firebaseLogOut}
-                >Log Out</Button>} <br />
+                    onClick={() => dispatch(logOut())}
+                >Log Out</Button>}
             {userName}
         </>
     )
