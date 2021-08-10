@@ -1,43 +1,48 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import Button from "@material-ui/core/Button";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { Grid } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
+import { CircularProgress } from "@material-ui/core";
 import { useGetCurrentUser } from "../../Hooks/useGetCurrentUser";
-import { logIn, logOut } from "../../State/userSlice";
+import { Header } from "../../Components/Header";
+import { useStyles } from "./useStyles";
 
 export const Home = () => {
 
     const currentUser = useGetCurrentUser();
 
-    const dispatch = useDispatch();
-
     const [isLogin, setIsLogin] = useState(false);
-    const [userName, setUserName] = useState("");
+
+    const styles = useStyles();
 
     useEffect(() => {
         setIsLogin(!!currentUser);
-        setUserName(currentUser?.displayName)
     }, [currentUser]);
 
     return (
         <>
-            {!isLogin
-                ?
-                <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<FacebookIcon />}
-                    onClick={() => dispatch(logIn())}
-                >Log In</Button>
+            <Header />
+            {isLogin ?
+                <Grid container className={styles.root} spacing={2}>
+                <Grid item xs={12}>
+                  <Grid container justifyContent="center" spacing={2}>
+                      <Grid  item>
+                        <Paper className={styles.paper} />
+                        1
+                      </Grid>
+                      <Grid  item>
+                        <Paper className={styles.paper} />
+                        2
+                      </Grid>
+                      <Grid  item>
+                        <Paper className={styles.paper} />
+                        3
+                      </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
                 :
-                <Button
-                    variant="contained"
-                    color="default"
-                    startIcon={<ExitToAppIcon />}
-                    onClick={() => dispatch(logOut())}
-                >Log Out</Button>}
-            {userName}
+                <CircularProgress />
+            }
         </>
     )
 }

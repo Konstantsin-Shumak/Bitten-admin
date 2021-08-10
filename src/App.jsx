@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { authorizator } from "./Services/Authorizator";
 import { Home } from "./Pages/Home";
-import { useStyles } from "./useStyles";
+import { Container } from "@material-ui/core";
 
 export const App = () => {
 
   const [isInizialized, setIsInizialized] = useState(false);
-  const styles = useStyles();
 
   useEffect(() => {
     setIsInizialized(false);
@@ -15,12 +14,12 @@ export const App = () => {
   }, []);
 
   return (
-    <div className={styles.wrapper}>
+    <Container maxWidth="lg">
       {isInizialized
         ?
         <Home />
         :
         <p>Inizializaion</p>}
-    </div>
+    </Container>
   );
 }
