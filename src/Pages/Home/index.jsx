@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Grid } from "@material-ui/core";
-import { Paper } from "@material-ui/core";
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
 import { CircularProgress } from "@material-ui/core";
 import { useGetCurrentUser } from "../../Hooks/useGetCurrentUser";
 import { Header } from "../../Components/Header";
@@ -18,28 +25,44 @@ export const Home = () => {
         setIsLogin(!!currentUser);
     }, [currentUser]);
 
+    function createData(name, calories, fat, carbs, protein) {
+      return { name, calories, fat, carbs, protein };
+    }
+
+    const rows = [
+      createData(682, '16.07.2021', 'roseeeoood', 'roseeeoood', 2),
+    ];
+
     return (
         <>
             <Header />
             {isLogin ?
-                <Grid container className={styles.root} spacing={2}>
-                <Grid item xs={12}>
-                  <Grid container justifyContent="center" spacing={2}>
-                      <Grid  item>
-                        <Paper className={styles.paper} />
-                        1
-                      </Grid>
-                      <Grid  item>
-                        <Paper className={styles.paper} />
-                        2
-                      </Grid>
-                      <Grid  item>
-                        <Paper className={styles.paper} />
-                        3
-                      </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
+                <TableContainer component={Paper}>
+                <Table className={styles.table} size="small" aria-label="a dense table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell className={styles.tables__header}>Number</TableCell>
+                      <TableCell className={styles.tables__header} align="right">LastSeenOn</TableCell>
+                      <TableCell className={styles.tables__header} align="right">Nick</TableCell>
+                      <TableCell className={styles.tables__header} align="right">NickLowered</TableCell>
+                      <TableCell className={styles.tables__header} align="right">Status</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow key={row.name}>
+                        <TableCell component="th" scope="row">
+                          {row.name}
+                        </TableCell>
+                        <TableCell align="right">{row.calories}</TableCell>
+                        <TableCell align="right">{row.fat}</TableCell>
+                        <TableCell align="right">{row.carbs}</TableCell>
+                        <TableCell align="right">{row.protein}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
                 :
                 <CircularProgress />
             }
